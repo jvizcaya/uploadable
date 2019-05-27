@@ -1,0 +1,22 @@
+{
+    "name": "jvizcaya/uploadable",
+    "description": "Laravel Eloquent trait for storage base64 encoded data",
+    "keywords": ["laravel", "eloquent", "upload", "base64", "database", "model"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jorge Vizcaya",
+            "email": "jorgevizcayaa@gmail.com"
+        }
+    ],
+    "require": {
+      "php": "^7.1.3",
+      "intervention/image": "^2.4"
+    },
+    "autoload": {
+       "psr-4": {
+           "Jvizcaya\\Uploadable\\": "src/"
+       }
+   },
+  "minimum-stability": "stable"
+}
