@@ -19,8 +19,6 @@ trait UploadableTrait
 		* @var array
 		*/
 		protected $storage_config = [];
-
-
 		/**
      * Storage the base64 file
      *

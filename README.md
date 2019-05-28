@@ -4,14 +4,12 @@
 
 Al estar relacionado con el modelo, solo debemos especificar la columna en la tabla (base de dato) en el cual deseamos que se guarde el nombre del archivo almacenado en disco.
 
-** La columna donde se guarda el nombre del archivo debe permitir contener valores nulos ya que la funciones del trait actúan luego de los métodos save() o update() del modelo.**
+**La columna donde se guarda el nombre del archivo debe permitir contener valores nulos ya que la funciones del trait actúan luego de los métodos save() o update() del modelo.**
 
 ## Instalación
 
-Agrega el nombre del paquete en el archivo `composer.json` y ejecuta  `composer update`.
-
 ```
-"jvizcaya/uploadable": "1.*"
+composer require jvizcaya/uploadable
 ```
 
 ## Modo de uso
