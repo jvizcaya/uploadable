@@ -1,4 +1,8 @@
-<?php namespace Jvizcaya\Uploadable;
+<?php
+
+declare(strict_types=1);
+
+namespace Jvizcaya\Uploadable;
 
 use Exception;
 use Intervention\Image\Facades\Image;
@@ -142,7 +146,7 @@ trait UploadableTrait
 		 * @param  string $folder      	folder to be saved (optional)
 		 * @return array
 		 */
-		private function setStorageConfig($base64_file = null, $table_column = null, $file_name = null, $folder = null)
+		private function setStorageConfig($base64_file = null, $table_column = null, $file_name = null, $folder = null): array
 		{
         $this->checkRequiredProperty();
 
@@ -186,7 +190,7 @@ trait UploadableTrait
 		 * @throws Exception
 		 * @return bool
 		 */
-		private function isValidKey($key)
+		private function isValidKey($key): bool
 		{
         if(array_key_exists($key, $this->uploadable)){
           return true;
@@ -202,7 +206,7 @@ trait UploadableTrait
 		 * @throws Exception
 		 * @return bool
 		 */
-		private function isFolderKey($key)
+		private function isFolderKey($key): string
 		{
         if(isset($this->uploadable[$key]['folder']) && $this->uploadable[$key]['folder'])
         {
@@ -317,7 +321,7 @@ trait UploadableTrait
 		 * @throws Exception
 		 * @return string file extension
 		 */
-		private function getFileExtension($base64_file)
+		private function getFileExtension($base64_file): string
 	 	{
 			 $mime_type = explode(';', $base64_file)[0];
 
@@ -361,7 +365,7 @@ trait UploadableTrait
 		 * @param  string $file_name      the file name (optionl)
 		 * @return string
 		 */
-		private function getFileName($table_column, $folder, $file_extension, $file_name = null)
+		private function getFileName($table_column, $folder, $file_extension, $file_name = null): string
 		{
 				$name = isset($this->uploadable[$table_column]['name_column']) && ! $file_name ? $this->attributes[$this->uploadable[$table_column]['name_column']] : $file_name;
 
@@ -369,7 +373,7 @@ trait UploadableTrait
 
 				$file_name = $file_name.$file_extension;
 
-				return $this->uniqueFileName($file_name, $folder) ?: $file_name;
+				return isset($this->attributes[$table_column]) && $this->attributes[$table_column] == $file_name ? $file_name : $this->uniqueFileName($file_name, $folder);
 
 		}
 
@@ -379,12 +383,12 @@ trait UploadableTrait
 		 *
 		 * @param  string $file_name the file_name
 		 * @param  string $folder 	folder to be saved
-		 * @return string|bool
+		 * @return string
 		 */
-		private function uniqueFileName($file_name, $folder)
+		private function uniqueFileName($file_name, $folder): string
 		{
 					if(! $this->getFileExist($file_name, $folder)){
-						return false;
+						return $file_name;
 						exit;
 					}else{
 
@@ -406,7 +410,7 @@ trait UploadableTrait
 		 * @param  string $folder    folder to be saved
 		 * @return bool
 		 */
-		private function getFileExist($file_name, $folder)
+		private function getFileExist($file_name, $folder): bool
 		{
 				return Storage::exists($folder.'/'.$file_name);
 		}
@@ -417,7 +421,7 @@ trait UploadableTrait
 		 * @param  [type] $file [description]
 		 * @return string
 		 */
-		private function fileFormat($base64_file)
+		private function fileFormat($base64_file): string
 		{
 				return base64_decode(explode(',', $base64_file)[1]);
 		}
@@ -429,7 +433,7 @@ trait UploadableTrait
 		 * @throws Exception
 		 * @return boolean
 		 */
-		private function is_base64($base64_file)
+		private function is_base64($base64_file): bool
 		{
         if(strpos($base64_file, "base64") !== false){
           return true;
@@ -445,7 +449,7 @@ trait UploadableTrait
 		 * @param  string  $base64_file the base64 data
 		 * @return boolean
 		 */
-		private function is_image($base64_file)
+		private function is_image($base64_file): bool
 		{
 				return strpos($base64_file, "data:image") !== false ? true : false;
 		}
@@ -468,7 +472,7 @@ trait UploadableTrait
 		 * @param  array 	$array;
 		 * @return array 	multiarray
 		 */
-		private function getMultiarray($array)
+		private function getMultiarray($array): array
 		{
 				$multiarray = [];
 
