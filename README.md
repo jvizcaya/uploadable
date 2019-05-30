@@ -219,7 +219,7 @@ $post->deleteFile('photo');
 ```php
 $post->deleteFile('photo', 'photos');
 ```
-**Nota:** Cuando se emplea `deleteAllFiles()`, o `deleteFile()`, Si el archivo borrado es una imagen, y este tiene configurado la regla `thumbnail`, se eliminaran de igual manera de forma automáticamente las imágenes generadas como miniaturas.
+**Nota:** Cuando se emplea `deleteAllFiles()`, o `deleteFile()`, Si el archivo borrado es una imagen, y este tiene configurado la regla `thumbnail`, se eliminaran tambien las imágenes generadas como miniaturas.
 
 ## Mover Archivos (Beta)
 
