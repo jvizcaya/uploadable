@@ -163,6 +163,8 @@ trait UploadableTrait
 
 				$thumbnail = $this->uploadable[$config_table_column]['thumbnail'] ?? '';
 
+				$quality = $this->uploadable[$config_table_column]['quality'] ?? $quality;
+
 				return ['table_column' => $config_table_column, 'folder' => $config_folder, 'file_name' => $file_name, 'thumbnail' => $thumbnail, 'quality' => $quality];
 
 		}
