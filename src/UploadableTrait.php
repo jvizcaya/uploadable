@@ -32,17 +32,16 @@ trait UploadableTrait
      * @param  string $table_column table column name (optional)
      * @param  string $file_name    save file name as (optional)
      * @param  string $folder      	folder to be saved (optional)
-     * @param  int    $quality      quality to be saved (optional)
      * @throws Exception
      * @return null
      */
-		public function storageFile(string $base64_file = null, string $table_column = null, string $file_name = null, string $folder = null, int $quality = 90)
+		public function storageFile(string $base64_file = null, string $table_column = null, string $file_name = null, string $folder = null)
 		{
           try{
 
             if($base64_file)
             {
-                $this->storage_config = $this->setStorageConfig($base64_file, $table_column, $file_name, $folder, $quality);
+                $this->storage_config = $this->setStorageConfig($base64_file, $table_column, $file_name, $folder);
 
     					  $this->_storage($base64_file);
             }
@@ -147,7 +146,7 @@ trait UploadableTrait
 		 * @param  string $folder      	folder to be saved (optional)
 		 * @return array
 		 */
-		private function setStorageConfig($base64_file = null, $table_column = null, $file_name = null, $folder = null, $quality = null): array
+		private function setStorageConfig($base64_file = null, $table_column = null, $file_name = null, $folder = null): array
 		{
         $this->checkRequiredProperty();
 
@@ -163,9 +162,7 @@ trait UploadableTrait
 
 				$thumbnail = $this->uploadable[$config_table_column]['thumbnail'] ?? '';
 
-				$quality = $this->uploadable[$config_table_column]['quality'] ?? $quality;
-
-				return ['table_column' => $config_table_column, 'folder' => $config_folder, 'file_name' => $file_name, 'thumbnail' => $thumbnail, 'quality' => $quality];
+				return ['table_column' => $config_table_column, 'folder' => $config_folder, 'file_name' => $file_name, 'thumbnail' => $thumbnail];
 
 		}
 
@@ -247,7 +244,7 @@ trait UploadableTrait
 
 				if($this->is_image($base64_file))
 				{
-						Image::make($file_format)->save(Storage::path($this->storage_config['folder'].'/'.$this->storage_config['file_name']), $this->storage_config['quality']);
+						Storage::put($this->storage_config['folder'].'/'.$this->storage_config['file_name'], $file_format);
 
 						if($this->storage_config['thumbnail']){
 								$this->createThumbnails($file_format);
@@ -276,7 +273,7 @@ trait UploadableTrait
 						$width  = isset($thumbnail_config['size'][0]) ? $thumbnail_config['size'][0] : 150;
 						$height = isset($thumbnail_config['size'][1]) ? $thumbnail_config['size'][1] : 150;
 
-						Image::make($file_format)->resize($width, $height)->save(Storage::path($thumbnail_config['folder'].'/'.$this->storage_config['file_name']), 75);
+						Image::make($file_format)->resize($width, $height)->save(Storage::path($thumbnail_config['folder'].'/'.$this->storage_config['file_name']), 60);
 				}
 
 		}

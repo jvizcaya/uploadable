@@ -109,34 +109,6 @@ Podemos hacer que el nombre del archivo sea tomado automaticamente desde otra de
  $post->storageFile($request->image, 'image', 'file name', 'folder_name');
  ```
 
- ### Calidad de imagen
-
- Cuando se guarda una imagen en formato  `jpg/jpeg`, podemos definir la calidad en que esta se guarda, usando la regla `quality` el valor numerico de la calidad deseada a la funcion `storageFile()`, desde 0 (pobre calidad de imagen, menor tamaño en disco)  a 100 (mejor calidad de imagen, mayor tamaño en disco), el valor por defecto es 90.
-
- ```php
-
-   use UploadableTrait;
-   /**
-    * Uploadable rules.
-    *
-    * @var array
-    */
-    protected $uploadable = [
-      'image' => [
-          'folder' => 'posts',
-          'name_column' => 'title',
-          'quality' => 80
-        ]
-    ];
-
- ```
-
- Alternativamente podemos pasar el valor numerico de la calidad deseada de la imagen como el quinto parametro de la funcion `storageFile()`.
-
- ```php
- $post->storageFile($request->image, 'image', 'file name', 'folder_name', 80);
- ```
-
 ### Thumbnails
 
 Cuando el archivo que deseamos almacenar **es una imagen** podemos generar miniaturas o replicas en varios tamaños, para esto debemos simplemente configurar la regla `thumbnail` en la variable `$uploadable`.
