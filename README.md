@@ -241,6 +241,7 @@ Actualmente la función `storageFile()` tiene soporte para los siguientes tipos 
 |Tipo MIME        |
 |-----------------|
 |application/pdf  |
+|application/json |
 |image/gif        |
 |image/jpeg       |
 |image/png        |

@@ -329,6 +329,9 @@ trait UploadableTrait
 				 case 'data:application/pdf':
 					 return ".pdf";
 				 break;
+				 case 'data:application/json':
+					 return ".json";
+				 break;
 				 case 'data:image/gif':
 					 return ".gif";
 				 break;
