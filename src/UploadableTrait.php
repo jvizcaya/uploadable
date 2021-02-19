@@ -496,7 +496,7 @@ trait UploadableTrait
 
 				$this->timestamps = false;
 
-				$this->update();
+				$this->saveQuietly();
 		}
 
 
