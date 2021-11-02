@@ -219,7 +219,19 @@ $post->deleteFile('photo');
 ```php
 $post->deleteFile('photo', 'photos');
 ```
-**Nota:** Cuando se emplea `deleteAllFiles()`, o `deleteFile()`, Si el archivo borrado es una imagen, y este tiene configurado la regla `thumbnail`, se eliminaran tambien las imágenes generadas como miniaturas.
+**Nota:** Cuando se emplea `deleteAllFiles()`, o `deleteFile()`, Si el archivo borrado es una imagen, y este tiene configurado la regla `thumbnail`, se eliminaran tambien las imágenes generadas como miniaturas.  
+
+Este paquete tiene como consideración que las funciones `deleteAllFiles()`y `deleteFile()`sean ejecutadas luego que el modelo asociado sea eliminado. Por lo tanto no realiza una limpieza en la columna de la base de datos.  
+
+Si se desea eliminar una imagen sin que sea eliminado el modelo, podemos enviar el parametro `nullColumn` como **true**. Este parámetro le indicará a las funciones de borrados de imágenes que deberan limpiar la columna en la tabla de la base de datos.
+
+```php
+$post->deleteAllFiles(true);
+
+$post->deleteFile('photo', 'photos', true);
+```
+
+**Nota:** El parámetro nullColumn no puede ser enviado, si el modelo asociado es previamente eliminado. Debe ser utilizado en los casos de una actualización del modelo o si se trata de un borrado suave [softDelete](https://laravel.com/docs/8.x/eloquent#soft-deleting).  
 
 ## Mover Archivos (Beta)
 

@@ -21,6 +21,7 @@ class ComposerStaticInit7b92e9a93ff0cbfa62fc34d8fb9333c4
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Jvizcaya\\Uploadable\\UploadableTrait' => __DIR__ . '/../..' . '/src/UploadableTrait.php',
     );
 
