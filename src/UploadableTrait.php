@@ -37,14 +37,21 @@ trait UploadableTrait
 	*/
 	public function storageFile(string $base64_file = null, string $table_column = null, string $file_name = null, string $folder = null)
 	{
-		try{
-
-		if($base64_file)
+		try
 		{
-			$this->storage_config = $this->setStorageConfig($base64_file, $table_column, $file_name, $folder);
 
-			$this->_storage($base64_file);
-		}
+			if($base64_file)
+			{
+				if($base64_file == 'delete_file')
+				{
+					$this->deleteFile($table_column, $folder, true);
+				}else{
+
+					$this->storage_config = $this->setStorageConfig($base64_file, $table_column, $file_name, $folder);
+
+					$this->_storage($base64_file);
+				}
+			}
 
 		}catch (Exception $e) {
 			echo $e->getMessage();

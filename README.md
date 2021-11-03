@@ -231,7 +231,9 @@ $post->deleteAllFiles(true);
 $post->deleteFile('photo', 'photos', true);
 ```
 
-**Nota:** El parámetro nullColumn no puede ser enviado, si el modelo asociado es previamente eliminado. Debe ser utilizado en los casos de una actualización del modelo o si se trata de un borrado suave [softDelete](https://laravel.com/docs/8.x/eloquent#soft-deleting).  
+**Nota:** El parámetro nullColumn no puede ser enviado, si el modelo asociado es previamente eliminado. Debe ser utilizado en los casos de una actualización del modelo o si se trata de un borrado suave [softDelete](https://laravel.com/docs/8.x/eloquent#soft-deleting).
+
+Alternativamente Podemos eliminar el archivo previamente guardado en la misma función de almacenamiento `storageFileFile`, para ello en lugar de enviar el archivo codificado en base64 como primer parámetro, enviamos una cadena con el valor de `delete_file`. Esta funcionalidad deberá ser utilizada solo en los casos que estemos actualizando el modelo asociado. **Nota:** Esta funcionalidad automáticamente limpiara el valor en la columna en la tabla de la base de datos.   
 
 ## Mover Archivos (Beta)
 
